@@ -5,18 +5,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 /**
  * Configures our application with Spring Security to restrict access to our API endpoints.
  */
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
     @Value("${auth0.audience}")
     private String audience;
@@ -32,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         */
         http.authorizeRequests()
                 .mvcMatchers("/api/public").permitAll()
-                .mvcMatchers("/api/fisiometria").permitAll()
                 .mvcMatchers("/api/private").authenticated()
                 .mvcMatchers("/api/usuarios").permitAll()
                 .mvcMatchers("/api/personas").authenticated()
@@ -60,5 +57,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return jwtDecoder;
     }
-
 }
