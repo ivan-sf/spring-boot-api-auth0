@@ -1,0 +1,28 @@
+debug: true
+server:
+  port: 8080
+
+auth0:
+  # Replace with the API Identifier for your Auth0 API.
+  audience: http://localhost:9443
+
+# The following is standard Spring Security OAuth2 configuration.
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5434/testspring
+    username: postgres
+    password: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Replace with the domain of your Auth0 tenant.
+          # Note the trailing slash is important!
+          issuer-uri: https://dev-def4ivdigjy5vayw.us.auth0.com/
